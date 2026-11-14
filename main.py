@@ -53,7 +53,9 @@ class Plugin:
             )
             out, _ = await asyncio.wait_for(info.communicate(), timeout=2)
             text = out.decode(errors="replace")
-            level = re.search(r"Battery Percentage:\s*\(?(\d+)", text)
+            level = re.search(r"Battery Percentage:\s*(?:0x[0-9a-fA-F]+\s*)?\((\d+)\)", text)
+            if not level:
+                level = re.search(r"Battery Percentage:\s*(\d+)", text)
             return {"connected": True, "battery": int(level.group(1)) if level else None}
         except Exception:
             return {"connected": False, "battery": None}
