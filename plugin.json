@@ -1,0 +1,11 @@
+{
+  "name": "Sony Control",
+  "author": "casp3rth3gh0st",
+  "flags": ["root"],
+  "api_version": 1,
+  "publish": {
+    "tags": ["audio", "bluetooth", "sony"],
+    "description": "Control Sony WH-1000XM5 noise cancellation and ambient sound from Steam Deck.",
+    "image": ""
+  }
+}
