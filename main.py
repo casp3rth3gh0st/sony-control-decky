@@ -88,9 +88,16 @@ class Plugin:
 
     async def set_ambient_level(self, level):
         try:
-            level = max(0, min(20, int(level)))
+            level = int(level)
         except (TypeError, ValueError):
             return {"ok": False, "error": "Ambient level must be between 0 and 20"}
+        if not 0 <= level <= 20:
+            return {"ok": False, "error": "Ambient level must be between 0 and 20"}
+        # sony-headphonesctl currently accepts 1–20. Keep the requested 0–20
+        # UI range, but explain the companion limitation instead of silently
+        # clamping zero to a different value.
+        if level == 0:
+            return {"ok": False, "error": "sony-headphonesctl only supports ambient levels 1–20"}
         _, error = await self._run("ambient-level", str(level))
         return {"ok": error is None, "error": error or ""}
 

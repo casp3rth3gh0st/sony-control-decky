@@ -6,6 +6,8 @@ A Decky Loader plugin for Sony WH-1000XM5 headphones. It shows BlueZ connection 
 
 Noise controls use `sony-headphonesctl`, provided by [sony-headphones-linux](https://github.com/VyomJain6904/sony-headphones-linux). Install that controller on SteamOS and make sure the executable is on Decky's `PATH`. The plugin reads basic connection/battery data from `bluetoothctl` as a fallback. The WH-1000XM5 control protocol is proprietary and reverse engineered; protocol behavior has not been tested on this Deck or headset. Firmware changes may affect compatibility. The controller project reports a tested WH-1000XM5 path on firmware 2.5.1.
 
+The UI exposes the requested ambient range of 0–20. The current `sony-headphonesctl` CLI accepts only 1–20, so selecting 0 returns a clear unsupported-level error and does not send a command.
+
 ## Build
 
 ```sh
